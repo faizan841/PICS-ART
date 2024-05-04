@@ -1,10 +1,10 @@
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useInfiniteQuery } from "react-query";
 import { fetchApi } from "../index";
 
 import { useEffect } from "react";
 import { useTheme } from "@emotion/react";
-import { LastPage } from "@mui/icons-material";
+
 import { useInView } from "react-intersection-observer";
 import ImageResults from "../Components/ImageResults";
 
@@ -45,8 +45,10 @@ const InitialResults = ({ handleLogo }) => {
   return (
     isSuccess && (
       <>
-        <ImageResults data={data} cols={cols} />
-        <div ref={ref}></div>
+        <Box sx={{ bgcolor: "#d6c9a1" }}>
+          <ImageResults data={data} cols={cols} />
+          <div ref={ref}></div>
+        </Box>
       </>
     )
   );

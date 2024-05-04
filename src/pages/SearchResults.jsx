@@ -56,8 +56,10 @@ const SearchResults = ({ query }) => {
   return (
     isSuccess && (
       <>
-        <ImageResults data={data} cols={cols} />
-        <div ref={ref}></div>
+        <Box sx={{ bgcolor: "#d6c9a1" }}>
+          <ImageResults data={data} cols={cols} />
+          <div ref={ref}></div>
+        </Box>
       </>
     )
   );

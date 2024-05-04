@@ -38,8 +38,14 @@ const ImageResults = ({ data, cols }) => {
   }
 
   return (
-    <Box sx={{ px: { sm: "2rem", lg: "5rem", xl: "10rem" }, py: "5rem" }}>
-      <ImageList gap={30} cols={cols} variant="standard">
+    <Box
+      sx={{
+        px: { sm: "2rem", lg: "5rem", xl: "10rem" },
+        py: "5rem",
+        bgcolor: "#d6c9a1",
+      }}
+    >
+      <ImageList gap={30} cols={cols} variant="masonry">
         {data?.pages.map((page, pageIndex) =>
           (page.results || page).map((item, index) => (
             <ImageListItem
@@ -48,12 +54,14 @@ const ImageResults = ({ data, cols }) => {
                 maxWidth: "100%",
                 position: "relative",
                 cursor: "pointer",
+                borderRadius: "2rem",
               }}
               key={item.id}
               onMouseEnter={() => setHovered(item.id)}
               onMouseLeave={() => setHovered(null)}
             >
               <img
+                className="result-image"
                 src={item?.urls?.small}
                 alt={item?.alt_description}
                 loading="lazy"

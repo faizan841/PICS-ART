@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  background-color: "#d6c9a1";
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.result-image {
+  border-radius: 2rem;
+}
