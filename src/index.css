@@ -1,6 +1,5 @@
 * {
   margin: 0;
-  background-color: "#d6c9a1";
 }
 
 .search-bar {
@@ -11,4 +10,19 @@
 
 .result-image {
   border-radius: 2rem;
+  object-fit: contain;
+  aspect-ratio: 1 / auto;
+}
+
+.slider-container {
+  max-width: 95%;
+  margin: auto;
+  padding-top: 3rem;
+}
+
+.container {
+  background-color: #d6c9a1;
+}
+.slick-slide > div {
+  margin: 1rem;
 }

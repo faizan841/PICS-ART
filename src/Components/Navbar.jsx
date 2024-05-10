@@ -57,9 +57,9 @@ const Navbar = forwardRef(({ handleClick, handleLogo }, ref) => {
           justifyContent: "space-between",
           alignItems: "center",
           backgroundColor: "#2f2626",
-          width: "80%",
+          width: { md: "80%" },
           margin: "auto",
-          borderRadius: "2.5rem",
+          borderRadius: { md: "null", lg: "2.5rem" },
         }}
       >
         <Link to={`/`}>

@@ -7,6 +7,8 @@ import SearchResults from "./pages/SearchResults";
 import { useState, useRef } from "react";
 import InitialResults from "./pages/InitialResults";
 import { useTheme } from "@mui/material/styles";
+import TopicResult from "./pages/TopicResult";
+import TopicsCarousel from "./Components/TopicsCarousel";
 
 const App = () => {
   const theme = useTheme();
@@ -20,6 +22,7 @@ const App = () => {
   const childRef = useRef(null);
   const [search, setSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [carouselValue, setCarouselValue] = useState("");
 
   const handleClick = () => {
     const inputValue = childRef.current?.getValue();
@@ -34,6 +37,11 @@ const App = () => {
     setSearch(false);
   };
 
+  const handleCarousel = (value) => {
+    setCarouselValue(value);
+    console.log(value);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
@@ -43,7 +51,7 @@ const App = () => {
             handleClick={handleClick}
             handleLogo={handleLogo}
           />
-
+          <TopicsCarousel handleCarousel={handleCarousel} />
           <Routes>
             <Route
               path="/"
@@ -54,6 +62,11 @@ const App = () => {
             <Route
               path="/search/:query"
               element={<SearchResults query={searchQuery} />}
+            />
+
+            <Route
+              path="/topics/:id/photos"
+              element={<TopicResult carouselValue={carouselValue} />}
             />
           </Routes>
         </BrowserRouter>

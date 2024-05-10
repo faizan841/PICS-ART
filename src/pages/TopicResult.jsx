@@ -1,33 +1,32 @@
-import { Box, useMediaQuery } from "@mui/material";
 import { useInfiniteQuery } from "react-query";
+import { Box, useMediaQuery } from "@mui/material";
 import { fetchApi } from "../index";
-
 import { useEffect } from "react";
 import { useTheme } from "@emotion/react";
-
 import { useInView } from "react-intersection-observer";
 import ImageResults from "../Components/ImageResults";
 import TopicsCarousel from "../Components/TopicsCarousel";
 
-const InitialResults = ({ handleLogo }) => {
+const TopicResult = ({ carouselValue }) => {
   const theme = useTheme();
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const { ref, inView, entry } = useInView();
+  const { ref, inView } = useInView();
 
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, isSuccess } =
-    useInfiniteQuery({
-      queryKey: "photos",
-
-      queryFn: async ({ pageParam = 1 }) => {
-        const response = await fetchApi(`photos`, pageParam);
-        return response;
-      },
-      initialPageParam: 1,
-      getNextPageParam: (lastPage, allPages) => {
-        return allPages.length + 1;
-      },
-    });
+  const { data, fetchNextPage, hasNextPage, isSuccess } = useInfiniteQuery({
+    queryKey: ["Topics", carouselValue],
+    queryFn: async ({ pageParam = 1 }) => {
+      const response = await fetchApi(
+        `/topics/${carouselValue}/photos`,
+        pageParam
+      );
+      return response;
+    },
+    initialPageParam: 1,
+    getNextPageParam: (allPages) => {
+      return allPages.length + 1;
+    },
+  });
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -41,8 +40,8 @@ const InitialResults = ({ handleLogo }) => {
   } else if (isSmallScreen) {
     cols = 1;
   }
-
   console.log(data);
+
   return (
     isSuccess && (
       <>
@@ -54,4 +53,5 @@ const InitialResults = ({ handleLogo }) => {
     )
   );
 };
-export default InitialResults;
+
+export default TopicResult;

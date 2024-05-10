@@ -37,6 +37,8 @@ const ImageResults = ({ data, cols }) => {
       });
   }
 
+  console.log(data?.pages[0]);
+
   return (
     <Box
       sx={{
@@ -45,12 +47,16 @@ const ImageResults = ({ data, cols }) => {
         bgcolor: "#d6c9a1",
       }}
     >
-      <ImageList gap={30} cols={cols} variant="masonry">
+      <ImageList
+        gap={30}
+        cols={cols}
+        variant={{ sm: "standard", md: "masonry" }}
+        sx={{ marginX: "auto", width: "90%" }}
+      >
         {data?.pages.map((page, pageIndex) =>
           (page.results || page).map((item, index) => (
             <ImageListItem
               sx={{
-                objectFit: "cover",
                 maxWidth: "100%",
                 position: "relative",
                 cursor: "pointer",
